@@ -47,6 +47,8 @@ YouTube 영상에서 질 나쁜 댓글들을 필터해주는 익스텐션. 사�
 3. 제보창에 제보할 댓글의 계정, 댓글 내용, 추가 의견을 입력하고 "제보" 버튼을 누릅니다.
 4. 제보가 완료되면 제보창이 닫힙니다.
 
+* 필터는 [여기](https://github.com/Pindang2/yt-comment-clinic-filter)에서 관리합니다. 혹시 필터에 직접 기여하고 싶다면 https://github.com/Pindang2/yt-comment-clinic-filter/ 를 참고해주세요.
+
 ## 테스트 방법
 
 1. 확장 프로그램을 설치한 후, YouTube 동영상 페이지로 이동합니다. (예: https://www.youtube.com/watch?v=dQw4w9WgXcQ)
