@@ -2,16 +2,19 @@
 
 YouTube 영상에서 질 나쁜 댓글들을 필터해주는 익스텐션. 사실 Claude가 거의 전부 만듬 클로드 만만세
 
+  ![extensionreadme1](https://github.com/user-attachments/assets/9512e56c-7e93-42bd-ac70-b233e06e7233)
+  
 ## 기능
 
 - regex 기반 필터 데이터베이스에서 정기적으로 동기화
 - regex 기반 필터에 포함되는 댓글을 숨기기
 - 사용자가 직접 차단할 단어를 추가하거나 제보할 수 있음
 
+
 ## 설치 방법
 
 1. 이 저장소를 클론하거나 다운로드합니다.
-2. Chrome 브라우저에서 `chrome://extensions/` 페이지로 이동합니다.
+2. Chrome 및 Chromium 기반 호환 브라우저에서 `chrome://extensions/` 페이지로 이동합니다.
 3. 개발자 모드를 활성화합니다.
 4. "압축해제된 확장 프로그램을 로드합니다" 버튼을 클릭합니다.
 5. 다운로드한 프로젝트 폴더의 `extension` 폴더를 선택합니다.
