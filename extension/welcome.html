@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>환영합니다 - YT Comment Clinic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            width: 400px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        h1 {
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .step {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .step-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #4285f4;
+        }
+        
+        .cta-button {
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .cta-button:hover {
+            background-color: #3367d6;
+        }
+
+        .filter-list {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+
+        .filter-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .filter-item input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .filter-item label {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .filter-name {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .filter-description {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .beta-tag {
+            background-color: #ff5722;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 8px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        .error-message {
+            color: #d32f2f;
+            text-align: center;
+            padding: 10px;
+            background-color: #ffebee;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .download-progress {
+            height: 4px;
+            width: 100%;
+            background-color: #e0e0e0;
+            margin-top: 15px;
+            border-radius: 2px;
+            overflow: hidden;
+            display: none;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background-color: #4285f4;
+            transition: width 0.3s;
+        }
+
+        .view-step {
+            display: none !important;
+        }
+
+        .view-step.active {
+            display: block !important;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .back-button {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>YT Comment Clinic에 오신 것을 환영합니다!</h1>
+        <p>고품질 댓글 감상을 위한 첫 단계를 시작해 보세요.</p>
+        
+        <!-- 첫 번째 단계 - 소개 -->
+        <div id="step1" class="view-step active">
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-title">1. 필터 선택</div>
+                    <p>사용할 필터를 선택하여 스팸, 광고, 악성 댓글을 효과적으로 차단할 수 있습니다.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">2. 필터 활성화</div>
+                    <p>필터를 활성화하면 YouTube 댓글이 자동으로 필터링됩니다. 언제든지 필터를 켜고 끌 수 있습니다.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">3. 개인 단어 추가</div>
+                    <p>보고 싶지 않은 특정 단어나 패턴이 있다면 직접 추가하여 맞춤형 댓글 환경을 만들 수 있습니다.</p>
+                </div>
+            </div>
+            
+            <button id="nextButton" class="cta-button">다음</button>
+        </div>
+        
+        <!-- 두 번째 단계 - 필터 선택 -->
+        <div id="step2" class="view-step">
+            <div class="step">
+                <div class="step-title">필터 선택</div>
+                <p>사용할 필터를 선택해 주세요. 여러 개를 선택할 수 있습니다.</p>
+                
+                <div id="filterList" class="filter-list">
+                    <div class="loading">필터 목록을 불러오는 중...</div>
+                </div>
+                
+                <div id="errorMessage" class="error-message" style="display: none;"></div>
+                
+                <div class="button-container">
+                    <button id="backButton" class="cta-button back-button">이전</button>
+                    <button id="downloadButton" class="cta-button">다운로드</button>
+                </div>
+                
+                <div id="downloadProgress" class="download-progress">
+                    <div id="progressBar" class="progress-bar"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 세 번째 단계 - 완료 -->
+        <div id="step3" class="view-step">
+            <div class="step">
+                <div class="step-title">설정 완료!</div>
+                <p>필터가 다운로드되었습니다. 이제 YouTube 댓글이 자동으로 필터링됩니다.</p>
+                <p>언제든지 확장 프로그램 아이콘을 클릭하여 설정을 변경할 수 있습니다.</p>
+            </div>
+            
+            <button id="finishButton" class="cta-button">시작하기</button>
+        </div>
+    </div>
+    
+    <!-- 외부 스크립트 파일 로드 -->
+    <script src="welcome.js"></script>
+</body>
+</html> 
